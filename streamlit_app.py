@@ -34,17 +34,25 @@ fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+ fruit_ch
 fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # Display the table on the page
 streamlit.dataframe(fruityvice_normalized)
-
+##
 import snowflake.connector
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
-#my_cur.execute("use warehouse pc_rivery_db.public")
-my_cur.execute("select * from fruit_load_list") 
-#my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
+my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
 my_data_row = my_cur.fetchone()
-#streamlit.header("The Fruits Load list contains: ") 
-streamlit.text("the fruit load list contain:")
+streamlit.text("Hello from Snowflake:")
 streamlit.text(my_data_row)
+
+
+
+
+
+
+
+
+
+
+
 
 #New Section to display fruityvice api response  to add
 streamlit.header("Fruityvice Fruit Advice!")
